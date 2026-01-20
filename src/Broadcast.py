@@ -2,6 +2,7 @@ from pybricks.hubs import PrimeHub
 from pybricks.parameters import Color
 from pybricks.tools import wait
 
+
 class Broadcast:
     """
     Creates an instance of the Broadcast class, allowing for seamless communication between LEGO Spike Prime Hubs.
