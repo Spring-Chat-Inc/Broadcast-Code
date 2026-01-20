@@ -1,3 +1,7 @@
+"""
+Code for: Basher
+"""
+
 from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import ForceSensor
 from pybricks.parameters import Port
@@ -5,7 +9,7 @@ from pybricks.parameters import Port
 from Broadcast import Broadcast
 
 
-CHANNEL = 17
+CHANNEL = 151
 
 INPUT_PAIRS = [
     [
@@ -17,6 +21,8 @@ INPUT_PAIRS = [
     ]
 ]
 
+hammer = ForceSensor(Port.D)
+
 def send_force_sensor_data():
     data = []
     
@@ -25,9 +31,11 @@ def send_force_sensor_data():
         force = forward.force() - backward.force()
 
         percentage = force * 10
-        percentage = min(max(100, percentage), 0)
+        percentage = max(min(100, percentage), -100)
 
         data.append(percentage)
+
+    data.append(hammer.pressed())
 
     return data
 

@@ -2,9 +2,17 @@ from pybricks.hubs import PrimeHub
 from pybricks.parameters import Color
 from pybricks.tools import wait
 
-
 class Broadcast:
-    def __init__(self, broadcast_channel: int, observe_channels: list[int], callback):
+    """
+    Creates an instance of the Broadcast class, allowing for seamless communication between LEGO Spike Prime Hubs.
+    Only the broadcast channel or the observe_channels needs to be set.
+
+    Parameters:
+    - callback (function): Runs on loop at 10 times per second. Either returns value to be sent, or receives a value if data has been sent.
+    - broadcast_channel (int): The channel to broadcast on.
+    - observe_channels (list[int]): Channels to observe.
+    """
+    def __init__(self, callback, broadcast_channel=None, observe_channels=None):
         self.observe_channels = observe_channels
         self.callback = callback
 

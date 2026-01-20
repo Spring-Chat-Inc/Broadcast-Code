@@ -22,6 +22,6 @@ def drive_motor_sets(speed):
             # Max speed: 1000
             motor.run(speed[motor_set_index] * 10)
 
-receiver = Broadcast(observe_channels=[CHANNEL], callback=drive_motor_sets)
+receiver = Broadcast(callback=drive_motor_sets, observe_channels=[CHANNEL])
 
 receiver.run_receiver()
