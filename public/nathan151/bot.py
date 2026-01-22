@@ -1,7 +1,3 @@
-"""
-Code for: Basher
-"""
-
 from pybricks.hubs import PrimeHub
 from pybricks.pupdevices import ForceSensor
 from pybricks.parameters import Port

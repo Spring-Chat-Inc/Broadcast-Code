@@ -1,0 +1,22 @@
+{
+    "channel": 17,
+    "bot": {
+        "name": "Yeah",
+        "ports": [
+            [
+                "A"
+            ],
+            [
+                "-E"
+            ]
+        ]
+    },
+    "controller": {
+        "name": "Oh Flip!",
+        "notes": "Uses motors as inputs.",
+        "ports": [
+            "A",
+            "-B"
+        ]
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "channel": 151,
+    "bot": {
+        "name": "Basher",
+        "notes": "Weapon is a hammer.",
+        "ports": [
+            [
+                "-F"
+            ], [
+                "B"
+            ]
+        ]
+    },
+    "controller": {
+        "name": "Oh Flip!",
+        "notes": "Uses force sensors.",
+        "ports": [
+            [
+                "A",
+                "E"
+            ],
+            [
+                "B",
+                "F"
+            ]
+        ]
+    }
+}
