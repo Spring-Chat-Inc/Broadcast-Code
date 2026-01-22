@@ -39,6 +39,6 @@ def send_force_sensor_data():
 
     return data
 
-sender = Broadcast(broadcast_channel=CHANNEL, callback=send_force_sensor_data)
+sender = Broadcast(callback=send_force_sensor_data, broadcast_channel=CHANNEL)
 
 sender.run_sender()

@@ -13,10 +13,11 @@ class Broadcast:
     - broadcast_channel (int): The channel to broadcast on.
     - observe_channels (list[int]): Channels to observe.
     """
-    def __init__(self, callback, broadcast_channel=None, observe_channels=None):
+    def __init__(self, callback, broadcast_channel=None, observe_channels=[0]):
+        print(callback, broadcast_channel, observe_channels)
+        
         self.observe_channels = observe_channels
         self.callback = callback
-
         self.hub = PrimeHub(broadcast_channel=broadcast_channel, observe_channels=observe_channels)
 
     def transmit(self, message):
