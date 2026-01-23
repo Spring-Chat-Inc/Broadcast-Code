@@ -31,7 +31,7 @@ class Broadcast:
             data = data_in()
             print(data)
 
-            status = Color.RED
+            status = Color.BLUE
 
             if data != None:
                 data_out(data)
