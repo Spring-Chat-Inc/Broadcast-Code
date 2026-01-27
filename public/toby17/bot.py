@@ -1,4 +1,8 @@
 from pybricks.hubs import PrimeHub
+"""
+Code for: Yeah
+"""
+
 from pybricks.pupdevices import Motor
 from pybricks.parameters import Direction, Port
 
@@ -13,6 +17,11 @@ MOTOR_SETS = [
     ], [
         Motor(Port.E, Direction.COUNTERCLOCKWISE)
     ]
+]
+
+flip_motors = [
+    Motor(Port.B),
+    Motor(Port.F, Direction.COUNTERCLOCKWISE)
 ]
 
 def drive_motor_sets(speed):

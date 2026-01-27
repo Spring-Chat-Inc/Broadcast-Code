@@ -3,7 +3,7 @@ Code for: Jeff
 """
 
 from pybricks.hubs import PrimeHub
-from pybricks.pupdevices import Motor
+from pybricks.pupdevices import Motor, ForceSensor
 from pybricks.parameters import Direction, Port
 
 from Broadcast import Broadcast
@@ -15,6 +15,8 @@ INPUT_MOTORS = [
     Motor(Port.A),
     Motor(Port.B, Direction.COUNTERCLOCKWISE)
 ]
+
+flip_button = ForceSensor(Port.C)
 
 for motor in INPUT_MOTORS:
     motor.reset_angle(0)
@@ -35,6 +37,16 @@ def send_force_sensor_data():
 
     return data
 
-sender = Broadcast(callback=send_force_sensor_data, broadcast_channel=CHANNEL)
+def fliper():
+    return flip_button.pressed()
+
+def main():
+    speeds = send_force_sensor_data()
+    is_flipped = fliper()
+
+    speeds.append(is_flipped)
+    return speeds
+
+sender = Broadcast(callback=main, broadcast_channel=CHANNEL)
 
 sender.run_sender()
