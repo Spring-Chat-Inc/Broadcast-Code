@@ -1,0 +1,31 @@
+{
+    "channel": 3,
+    "bot": {
+        "name": "",
+        "notes": "",
+        "ports": [
+            {
+                "name": "Base",
+                "port": "A",
+                "min": 0,
+                "max": 360
+            },
+            {
+                "name": "Secondary Arm",
+                "port": "D",
+                "min": 204,
+                "max": 311
+            },{
+                "name": "Primary Arm",
+                "port": "E",
+                "min": 8,
+                "max": 149
+            },{
+                "name": "Gripper",
+                "port": "C",
+                "min": 136,
+                "max": 238
+            }
+        ]
+    }
+}
