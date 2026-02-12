@@ -23,6 +23,9 @@ COMPONENTS = [
     }
 ]
 
+def from_percent(min, max, percentage):
+    return min + ((max - min) * percentage)
+
 def run_component(index, percentage, leverage = 5):
     component = COMPONENTS[index]
     port = component["port"]
@@ -31,7 +34,7 @@ def run_component(index, percentage, leverage = 5):
     
     true_percent = percentage / 100
     
-    degree = int(min + ((max - min) * true_percent))
+    degree = int(from_percent(min, max, true_percent))
     print(component["name"], degree)
     
 data = [50, 50, 50, 50]
