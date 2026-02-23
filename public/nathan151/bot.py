@@ -1,40 +1,55 @@
 from pybricks.hubs import PrimeHub
-from pybricks.pupdevices import ForceSensor
-from pybricks.parameters import Port
+from pybricks.pupdevices import Motor
+from pybricks.parameters import Direction, Port
+from pybricks.tools import wait
 
 from Broadcast import Broadcast
 
 
 CHANNEL = 151
 
-INPUT_PAIRS = [
+MOTOR_SETS = [
     [
-        ForceSensor(Port.A),
-        ForceSensor(Port.E)
+        Motor(Port.F, Direction.COUNTERCLOCKWISE)
     ], [
-        ForceSensor(Port.B),
-        ForceSensor(Port.F)
+        Motor(Port.B)
     ]
 ]
 
-hammer = ForceSensor(Port.D)
+HAMMER_SPEED = 700
+HAMMER_SWING = -135
 
-def send_force_sensor_data():
-    data = []
-    
-    for forward, backward in INPUT_PAIRS:
-        # Max force: 10
-        force = forward.force() - backward.force()
+right1 = Motor(Port.A)
+right2 = Motor(Port.D)
+left1  = Motor(Port.C, Direction.COUNTERCLOCKWISE)
+left2  = Motor(Port.E, Direction.COUNTERCLOCKWISE)
 
-        percentage = force * 10
-        percentage = max(min(100, percentage), -100)
+def hammer_swing():
+    right1.run_angle(HAMMER_SPEED,  HAMMER_SWING, wait=False)
+    right2.run_angle(HAMMER_SPEED,  HAMMER_SWING, wait=False)
+    left1.run_angle( HAMMER_SPEED,  HAMMER_SWING, wait=False)
+    left2.run_angle( HAMMER_SPEED,  HAMMER_SWING)
 
-        data.append(percentage)
+    wait(150)
 
-    data.append(hammer.pressed())
+    right1.run_angle(HAMMER_SPEED, -HAMMER_SWING, wait=False)
+    right2.run_angle(HAMMER_SPEED, -HAMMER_SWING, wait=False)
+    left1.run_angle( HAMMER_SPEED, -HAMMER_SWING, wait=False)
+    left2.run_angle( HAMMER_SPEED, -HAMMER_SWING)
 
-    return data
+def drive_motor_sets(data):
+    speed = data[0:2]
+    is_hammer = data[2]
 
-sender = Broadcast(callback=send_force_sensor_data, broadcast_channel=CHANNEL)
+    for motor_set_index in range(2):
+        for motor in MOTOR_SETS[motor_set_index]:
+            # Speed is a percentage (0-100)
+            # Max speed: 1000
+            motor.run(speed[motor_set_index] * 10)
 
-sender.run_sender()
+    if is_hammer:
+        hammer_swing()
+
+receiver = Broadcast(callback=drive_motor_sets, observe_channels=[CHANNEL])
+
+receiver.run_receiver()
